@@ -78,6 +78,12 @@ export class TabbedForm extends Component {
     handleSubmitWithRedirect = (redirect = this.props.redirect) =>
         this.props.handleSubmit(values => this.props.save(values, redirect));
 
+    handleKeyPress = event => {
+        if (event.key === 'Enter' && !this.props.submitOnEnter) {
+            event.preventDefault();
+        }
+    };
+
     render() {
         const {
             basePath,
@@ -105,6 +111,7 @@ export class TabbedForm extends Component {
             <form
                 className={classnames('tabbed-form', className)}
                 key={version}
+                onKeyPress={this.handleKeyPress}
                 {...sanitizeRestProps(rest)}
             >
                 <Tabs
