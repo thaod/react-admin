@@ -44,6 +44,11 @@ build-react-admin:
 	@mkdir packages/react-admin/docs
 	@cp docs/*.md packages/react-admin/docs
 
+build-ra-data-fakerest:
+	@echo "Transpiling ra-data-fakerest files...";
+	@rm -rf ./packages/ra-data-fakerest/lib
+	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./packages/ra-data-fakerest/src -d ./packages/ra-data-fakerest/lib --ignore spec.js,test.js
+
 build-ra-data-json-server:
 	@echo "Transpiling ra-data-json-server files...";
 	@rm -rf ./packages/ra-data-json-server/lib
@@ -84,7 +89,7 @@ build-data-generator:
 	@rm -rf ./examples/data-generator/lib
 	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./examples/data-generator/src -d ./examples/data-generator/lib
 
-build: build-ra-core build-ra-ui-materialui build-react-admin build-ra-data-json-server build-ra-data-simple-rest build-ra-data-graphql build-ra-data-graphcool build-ra-data-graphql-simple build-ra-input-rich-text build-ra-realtime build-data-generator ## compile ES6 files to JS
+build: build-ra-core build-ra-ui-materialui build-react-admin build-ra-data-fakerest build-ra-data-json-server build-ra-data-simple-rest build-ra-data-graphql build-ra-data-graphcool build-ra-data-graphql-simple build-ra-input-rich-text build-ra-realtime build-data-generator ## compile ES6 files to JS
 
 watch: ## continuously compile ES6 files to JS
 	@NODE_ENV=production ./node_modules/.bin/babel ./src -d lib --ignore spec.js,test.js --watch
