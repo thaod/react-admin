@@ -79,17 +79,22 @@ build-ra-realtime:
 	@rm -rf ./packages/ra-realtime/lib
 	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./packages/ra-realtime/src -d ./packages/ra-realtime/lib --ignore spec.js,test.js
 
-build-ra-materialui-treeview:
-	@echo "Transpiling ra-materialui-treeview files...";
-	@rm -rf ./packages/ra-materialui-treeview/lib
-	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./packages/ra-materialui-treeview/src -d ./packages/ra-materialui-treeview/lib --ignore spec.js,test.js
+build-ra-tree-core:
+	@echo "Transpiling ra-tree-core files...";
+	@rm -rf ./packages/ra-tree-core/lib
+	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./packages/ra-tree-core/src -d ./packages/ra-tree-core/lib --ignore spec.js,test.js
+
+build-ra-tree-ui-materialui:
+	@echo "Transpiling ra-tree-ui-materialui files...";
+	@rm -rf ./packages/ra-tree-ui-materialui/lib
+	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./packages/ra-tree-ui-materialui/src -d ./packages/ra-tree-ui-materialui/lib --ignore spec.js,test.js
 
 build-data-generator:
 	@echo "Transpiling data-generator files...";
 	@rm -rf ./examples/data-generator/lib
 	@NODE_ENV=production ./node_modules/.bin/babel --quiet ./examples/data-generator/src -d ./examples/data-generator/lib
 
-build: build-ra-core build-ra-ui-materialui build-react-admin build-ra-data-json-server build-ra-data-simple-rest build-ra-data-graphql build-ra-data-graphcool build-ra-data-graphql-simple build-ra-input-rich-text build-ra-realtime build-ra-materialui-treeview build-data-generator ## compile ES6 files to JS
+build: build-ra-core build-ra-ui-materialui build-react-admin build-ra-data-json-server build-ra-data-simple-rest build-ra-data-graphql build-ra-data-graphcool build-ra-data-graphql-simple build-ra-input-rich-text build-ra-realtime build-ra-tree-core build-ra-tree-ui-materialui build-data-generator ## compile ES6 files to JS
 
 watch: ## continuously compile ES6 files to JS
 	@NODE_ENV=production ./node_modules/.bin/babel ./src -d lib --ignore spec.js,test.js --watch
